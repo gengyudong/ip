@@ -1,9 +1,11 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Geng {
     public static void main(String[] args) {
-        Task[] taskList = new Task[100];
-        int inputCount = 0;
+        //Task[] taskList = new Task[100];
+        //int inputCount = 0;
+        ArrayList<Task> taskList = new ArrayList<>();
 
         System.out.println("Hey yo! I'm Geng");
         System.out.println("How can I help you?");
@@ -20,19 +22,38 @@ public class Geng {
                 }
 
                 if (input.equals("list")) {
-                    if (inputCount == 0) {
+                    if (taskList.isEmpty()) {
                         System.out.println("No texts stored yet! Talk to me more!");
                     } else {
-                        for (int i = 0; i < inputCount; i++) {
-                            System.out.println(i + 1 + "." + taskList[i].toString());
+                        for (int i = 0; i < taskList.size(); i++) {
+                            System.out.println(i + 1 + "." + taskList.get(i).toString());
                         }
+                    }
+                } else if (input.startsWith("delete")) {
+                    try {
+                        int index = Integer.parseInt(input.split(" ")[1]) - 1;
+
+                        if (taskList.isEmpty()) {
+                            throw new GengException("Invalid task number. Please enter a task first.");
+                        } else if (index < 0 || index > taskList.size()) {
+                            throw new GengException("Invalid task number. Please enter a number from 1 to " + taskList.size());
+                        }
+
+                        Task task = taskList.get(index);
+                        taskList.remove(index);
+
+                        System.out.println("Alright! I've removed this task:");
+                        System.out.println("  " + task.toString());
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+                    } catch (GengException e) {
+                        System.out.println("ERROR! " + e.getMessage());
                     }
                 } else if (input.startsWith("mark")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                        Task task = taskList[index];
+                        Task task = taskList.get(index);
 
-                        if (index < 0 || index > inputCount) {
+                        if (index < 0 || index > 99) {
                             System.out.println("Invalid task number. Please enter a number from 1 to 100");
                         }
 
@@ -45,9 +66,9 @@ public class Geng {
                 } else if (input.startsWith("unmark")) {
                     try {
                         int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                        Task task = taskList[index];
+                        Task task = taskList.get(index);
 
-                        if (index < 0 || index > inputCount) {
+                        if (index < 0 || index > 99) {
                             System.out.println("Invalid task number. Please enter a number from 1 to 100");
                         }
 
@@ -64,12 +85,11 @@ public class Geng {
                             throw new GengException("The description cannot be empty yo! Input: todo <description>");
                         }
                         ToDos todoTask = new ToDos(taskDescription);
-                        taskList[inputCount] = todoTask;
-                        inputCount++;
+                        taskList.add(todoTask);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + todoTask.toString());
-                        System.out.println("Now you have " + inputCount + " tasks in the list.");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     } catch (GengException e) {
                         System.out.println("ERROR! " + e.getMessage());
                     }
@@ -84,12 +104,11 @@ public class Geng {
                         String deadline = parts[1].trim();
 
                         Deadlines deadlineTask = new Deadlines(description, deadline);
-                        taskList[inputCount] = deadlineTask;
-                        inputCount++;
+                        taskList.add(deadlineTask);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + deadlineTask.toString());
-                        System.out.println("Now you have " + inputCount + " tasks in the list.");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     } catch (GengException e) {
                         System.out.println("ERROR! " + e.getMessage());
                     }
@@ -107,12 +126,11 @@ public class Geng {
                         String toDatetime = toParts[1].trim();
 
                         Events eventTask = new Events(description, fromDatetime, toDatetime);
-                        taskList[inputCount] = eventTask;
-                        inputCount++;
+                        taskList.add(eventTask);
 
                         System.out.println("Got it. I've added this task:");
                         System.out.println("  " + eventTask.toString());
-                        System.out.println("Now you have " + inputCount + " tasks in the list.");
+                        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
                     } catch (GengException e) {
                         System.out.println("ERROR! " + e.getMessage());
                     }
