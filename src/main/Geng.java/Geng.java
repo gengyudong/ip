@@ -24,8 +24,7 @@ public class Geng {
                     System.out.println("No texts stored yet! Talk to me more!");
                 } else {
                     for (int i = 0; i < inputCount; i++) {
-                        String status = taskList[i].getStatusIcon();
-                        System.out.println(i + 1 + "." + status + " " + taskList[i].getDescription());
+                        System.out.println(i + 1 + "." + taskList[i].toString());
                     }
                 }
             } else if (input.startsWith("mark")) {
@@ -39,7 +38,7 @@ public class Geng {
 
                     task.markComplete();
                     System.out.println("Good Job! I've marked this task as done:");
-                    System.out.println("  " + task.getStatusIcon() + " " + task.getDescription());
+                    System.out.println("  " + task.toString());
                 } catch (Exception e) {
                     System.out.println("Invalid command format. Use mark (task no.)");
                 }
@@ -54,15 +53,47 @@ public class Geng {
 
                     task.markUncomplete();
                     System.out.println("Oki, I've marked this task not done yet:");
-                    System.out.println("  " + task.getStatusIcon() + " " + task.getDescription());
+                    System.out.println("  " + task.toString());
                 } catch (Exception e) {
-                    System.out.println("Invalid command format. Use mark (task no.)");
+                    System.out.println("Invalid command format. Use unmark (task no.)");
                 }
-            } else {
-                Task task = new Task(input);
-                taskList[inputCount] = task;
+            } else if (input.startsWith("todo")) {
+                String taskDescription = input.substring(4).trim();
+                ToDos todoTask = new ToDos(taskDescription);
+                taskList[inputCount] = todoTask;
                 inputCount++;
-                System.out.println("added: " + input);
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + todoTask.toString());
+                System.out.println("Now you have " + inputCount + " tasks in the list.");
+            } else if (input.startsWith("deadline")) {
+                String details = input.substring(8).trim();
+                String[] parts = details.split("/by", 2);
+                String description = parts[0].trim();
+                String deadline = parts[1].trim();
+
+                Deadlines deadlineTask = new Deadlines(description, deadline);
+                taskList[inputCount] = deadlineTask;
+                inputCount++;
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + deadlineTask.toString());
+                System.out.println("Now you have " + inputCount + " tasks in the list.");
+            } else if (input.startsWith("event")) {
+                String details = input.substring(5).trim();
+                String[] fromParts = details.split("/from", 2);
+                String[] toParts = fromParts[1].split("/to", 2);
+                String description = fromParts[0].trim();
+                String fromDatetime = toParts[0].trim();
+                String toDatetime = toParts[1].trim();
+
+                Events eventTask = new Events(description, fromDatetime, toDatetime);
+                taskList[inputCount] = eventTask;
+                inputCount++;
+
+                System.out.println("Got it. I've added this task:");
+                System.out.println("  " + eventTask.toString());
+                System.out.println("Now you have " + inputCount + " tasks in the list.");
             }
         }
         scanner.close();
