@@ -1,3 +1,8 @@
+package duke.ui;
+
+import duke.commands.*;
+import duke.ui.GengException;
+
 public class Parser {
     public Command parseInput(String input) throws GengException {
         if (input.equals("list")) {

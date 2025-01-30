@@ -1,3 +1,8 @@
+package duke.commands;
+
+import duke.tasks.*;
+import duke.ui.*;
+
 public class AddDeadlineCommand implements Command {
     private final String description;
     private final String deadline;

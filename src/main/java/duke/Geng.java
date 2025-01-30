@@ -1,4 +1,10 @@
-import java.util.ArrayList;
+package duke;
+
+import duke.commands.Command;
+import duke.tasks.TaskList;
+import duke.ui.*;
+
+
 import java.util.Scanner;
 
 public class Geng {

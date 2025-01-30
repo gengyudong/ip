@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.tasks.*;
+import duke.ui.*;
 public class AddTodoCommand implements Command {
     private final String description;
 

@@ -1,12 +1,16 @@
-public class UnmarkCommand implements Command {
+package duke.commands;
+
+import duke.tasks.*;
+import duke.ui.*;
+public class MarkCommand implements Command {
     private final int taskIndex;
 
-    public UnmarkCommand(String input) throws GengException {
+    public MarkCommand(String input) throws GengException {
         try {
             String[] parts = input.split(" ");
             this.taskIndex = Integer.parseInt(parts[1]) - 1;
         } catch (Exception e) {
-            throw new GengException("Please specify a valid task number to unmark.");
+            throw new GengException("Please specify a valid task number to mark.");
         }
     }
 
@@ -16,8 +20,8 @@ public class UnmarkCommand implements Command {
             throw new GengException("Invalid task number.");
         }
         Task task = tasks.getTask(taskIndex);
-        task.markUncomplete();
-        ui.showTaskUnmarked(task);
+        task.markComplete();
+        ui.showTaskMarked(task);
         storage.saveTasksToFile(tasks.getTaskList());
     }
 }

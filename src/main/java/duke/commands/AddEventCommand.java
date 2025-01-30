@@ -1,3 +1,7 @@
+package duke.commands;
+
+import duke.tasks.*;
+import duke.ui.*;
 public class AddEventCommand implements Command {
     private final String description;
     private final String start;

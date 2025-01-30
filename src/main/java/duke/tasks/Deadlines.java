@@ -1,3 +1,7 @@
+package duke.tasks;
+
+import duke.ui.GengException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,7 +13,7 @@ public class Deadlines extends Task {
         this.deadline = parseDateTime(deadline);
     }
 
-    private LocalDateTime parseDateTime(String dateTime) throws GengException{
+    private LocalDateTime parseDateTime(String dateTime) throws GengException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(dateTime, formatter);

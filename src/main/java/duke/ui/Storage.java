@@ -1,3 +1,11 @@
+package duke.ui;
+
+import duke.tasks.Deadlines;
+import duke.tasks.Events;
+import duke.tasks.Task;
+import duke.tasks.ToDos;
+import duke.ui.GengException;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
