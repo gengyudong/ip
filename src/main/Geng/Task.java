@@ -20,7 +20,7 @@ public class Task {
     }
 
     public String toString() {
-        String completeIcon = (isDone ? "[X]" : "[ ]");
+        String completeIcon = (isDone ? " 1 |" : " 0 |");
         return completeIcon + " " + this.description;
     }
 }

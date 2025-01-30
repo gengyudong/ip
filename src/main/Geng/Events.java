@@ -10,6 +10,6 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + this.startDatetime + " to: " + this.endDatetime +")";
+        return "E |" + super.toString() + " | " + this.startDatetime + " - " + this.endDatetime;
     }
 }
