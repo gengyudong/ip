@@ -4,6 +4,10 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,6 +35,8 @@ public class Geng {
 
                 if (input.equals("list")) {
                     listTasks(taskList);
+                } else if (input.startsWith("list-date")) {
+                    listTaskByDate(input, taskList);
                 } else if (input.startsWith("delete")) {
                     deleteTask(input, taskList);
                 } else if (input.startsWith("mark")) {
@@ -55,7 +61,7 @@ public class Geng {
         scanner.close();
     }
 
-    public static void loadTasksFromFile(ArrayList<Task> taskList) {
+    private static void loadTasksFromFile(ArrayList<Task> taskList) {
         try {
             File file = new File(FILE_PATH);
             if (!file.exists()) {
@@ -78,7 +84,7 @@ public class Geng {
         }
     }
 
-    public static Task parseTask(String line) {
+    private static Task parseTask(String line) {
         try {
             String[] parts = line.split(" \\| ");
             String type = parts[0];
@@ -95,7 +101,9 @@ public class Geng {
 
             case "D":
                 String deadline = parts[3];
-                Deadlines deadlineTask = new Deadlines(description, deadline);
+                LocalDateTime by = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm a"));
+                String deadline2 = by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                Deadlines deadlineTask = new Deadlines(description, deadline2);
                 if (isDone == 1) {
                     deadlineTask.markComplete();
                 }
@@ -119,7 +127,7 @@ public class Geng {
         }
     }
 
-    public static void saveTasksToFile(ArrayList<Task> taskList) {
+    private static void saveTasksToFile(ArrayList<Task> taskList) {
         try {
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(FILE_PATH));
             for (Task task : taskList) {
@@ -133,7 +141,7 @@ public class Geng {
         }
     }
 
-    public static void listTasks(ArrayList<Task> taskList) {
+    private static void listTasks(ArrayList<Task> taskList) {
         if (taskList.isEmpty()) {
             System.out.println("No texts stored yet! Talk to me more!");
         } else {
@@ -143,7 +151,41 @@ public class Geng {
         }
     }
 
-    public static void deleteTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void listTaskByDate(String input, ArrayList<Task> taskList) throws GengException{
+        try {
+            String date = input.substring(9).trim();
+            LocalDate targetDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            System.out.println("Tasks on " + targetDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ":");
+            boolean existTask = false;
+
+            for (Task task : taskList) {
+                if (task instanceof Deadlines) {
+                    Deadlines deadlineTask = (Deadlines) task;
+                    LocalDateTime deadline = deadlineTask.getDeadline();
+                    if (deadline.toLocalDate().equals(targetDate)) {
+                        System.out.println(task.toString());
+                        existTask = true;
+                    }
+                } else if (task instanceof Events) {
+                    Events eventTask = (Events) task;
+                    LocalDateTime from = eventTask.getStartDatetime();
+                    LocalDateTime to = eventTask.getEndDatetime();
+                    if (from.toLocalDate().equals(targetDate) || to.toLocalDate().equals(targetDate)) {
+                        System.out.println(task.toString());
+                        existTask = true;
+                    }
+                }
+            }
+
+            if (!existTask) {
+                System.out.println("No tasks found for this date");
+            }
+        } catch (Exception e) {
+            throw new GengException("Invalid date format. Use list-date yyyy-MM-dd.");
+        }
+    }
+
+    private static void deleteTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
 
@@ -164,7 +206,7 @@ public class Geng {
         }
     }
 
-    public static void markTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void markTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
 
@@ -182,7 +224,7 @@ public class Geng {
         }
     }
 
-    public static void unmarkTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void unmarkTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             int index = Integer.parseInt(input.split(" ")[1]) - 1;
 
@@ -200,7 +242,7 @@ public class Geng {
         }
     }
 
-    public static void addTodoTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void addTodoTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             String taskDescription = input.substring(4).trim();
             if (taskDescription.isEmpty()) {
@@ -217,7 +259,7 @@ public class Geng {
         }
     }
 
-    public static void addDeadlineTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void addDeadlineTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             String details = input.substring(8).trim();
             if (details.isEmpty()) {
@@ -234,11 +276,11 @@ public class Geng {
             System.out.println("  " + deadlineTask.toString());
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } catch (GengException e) {
-            System.out.println("ERROR! " + e.getMessage());
+            throw new GengException("Invalid command format. Use deadline <description> /by <yyyy-MM-dd HHmm>");
         }
     }
 
-    public static void addEventTask(String input, ArrayList<Task> taskList) throws GengException {
+    private static void addEventTask(String input, ArrayList<Task> taskList) throws GengException {
         try {
             String details = input.substring(5).trim();
             if (details.isEmpty()) {
@@ -257,7 +299,8 @@ public class Geng {
             System.out.println("  " + eventTask.toString());
             System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         } catch (GengException e) {
-            System.out.println("ERROR! " + e.getMessage());
+            throw new GengException("Invalid command format. Use event <description> /from <yyyy-MM-dd HHmm> " +
+                    "/to <yyyy-MM-dd HHmm>");
         }
     }
 }
