@@ -1,3 +1,1 @@
-D | 0 | return book | 15 Oct 2019 18:00 pm
-D | 0 | return book | 10 Jan 2025 18:00 pm
-E | 0 | project meeting | 10 Jan 2025 00:00 am - 11 Jan 2025 23:59 pm
+T | 0 | borrow book
