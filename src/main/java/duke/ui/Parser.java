@@ -27,6 +27,8 @@ public class Parser {
             return new ListDateCommand(input);
         } else if (input.startsWith("delete")) {
             return new DeleteCommand(input);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input);
         } else if (input.startsWith("mark")) {
             return new MarkCommand(input);
         } else if (input.startsWith("unmark")) {
