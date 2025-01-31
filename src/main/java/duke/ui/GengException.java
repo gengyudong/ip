@@ -10,7 +10,8 @@ public class GengException extends Exception {
     /**
      * Constructs a new GengException with the specified detail message.
      *
-     * @param message The detail message, which is saved for later retrieval by the {@link Throwable#getMessage()} method.
+     * @param message The detail message, which is saved for later retrieval by the
+     * {@link Throwable#getMessage()} method.
      */
     public GengException(String message) {
         super(message);
