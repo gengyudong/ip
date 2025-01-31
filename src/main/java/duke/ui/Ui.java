@@ -46,15 +46,13 @@ public class Ui {
             boolean existTask = false;
 
             for (Task task : taskList) {
-                if (task instanceof Deadlines) {
-                    Deadlines deadlineTask = (Deadlines) task;
+                if (task instanceof Deadlines deadlineTask) {
                     LocalDateTime deadline = deadlineTask.getDeadline();
                     if (deadline.toLocalDate().equals(targetDate)) {
                         System.out.println(task.toString());
                         existTask = true;
                     }
-                } else if (task instanceof Events) {
-                    Events eventTask = (Events) task;
+                } else if (task instanceof Events eventTask) {
                     LocalDateTime from = eventTask.getStartDatetime();
                     LocalDateTime to = eventTask.getEndDatetime();
                     if (from.toLocalDate().equals(targetDate) || to.toLocalDate().equals(targetDate)) {
