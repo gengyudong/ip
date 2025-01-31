@@ -3,7 +3,23 @@ package duke.ui;
 import duke.commands.*;
 import duke.ui.GengException;
 
+/**
+ * The Parser class is responsible for parsing user input commands
+ * and returning the corresponding Command object. It interprets
+ * the input, creates the appropriate Command, and throws a
+ * {@link GengException} if the input is invalid.
+ */
 public class Parser {
+
+    /**
+     * Parses the user input and returns the corresponding Command object.
+     * This method determines the type of command (e.g., "list", "todo", "deadline", etc.)
+     * based on the input string and creates the appropriate Command.
+     *
+     * @param input The user input as a string.
+     * @return The corresponding Command object.
+     * @throws GengException If the input is invalid or does not match any known command.
+     */
     public Command parseInput(String input) throws GengException {
         if (input.equals("list")) {
             return new ListCommand();
