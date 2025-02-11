@@ -1,10 +1,4 @@
-package duke.ui;
-
-import duke.tasks.Deadlines;
-import duke.tasks.Events;
-import duke.tasks.Task;
-import duke.tasks.ToDos;
-import duke.ui.GengException;
+package geng.ui;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,6 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import geng.tasks.Deadlines;
+import geng.tasks.Events;
+import geng.tasks.Task;
+import geng.tasks.ToDos;
 
 /**
  * The Storage class is responsible for loading and saving tasks to/from a file.
@@ -121,7 +120,7 @@ public class Storage {
      * @param taskList The list of tasks to be saved to the file.
      * @throws GengException If an error occurs while saving tasks to the file.
      */
-    public void saveTasksToFile(ArrayList<Task> taskList) throws GengException{
+    public void saveTasksToFile(ArrayList<Task> taskList) throws GengException {
         try {
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(FILE_PATH));
             for (Task task : taskList) {

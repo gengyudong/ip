@@ -1,9 +1,9 @@
-package duke.tasks;
-
-import duke.ui.GengException;
+package geng.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import geng.ui.GengException;
 
 /**
  * Represents a task with a deadline.

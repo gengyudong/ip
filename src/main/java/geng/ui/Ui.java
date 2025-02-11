@@ -1,13 +1,13 @@
-package duke.ui;
-
-import duke.tasks.Deadlines;
-import duke.tasks.Events;
-import duke.tasks.Task;
+package geng.ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import geng.tasks.Deadlines;
+import geng.tasks.Events;
+import geng.tasks.Task;
 
 /**
  * The Ui class is responsible for displaying messages to the user.

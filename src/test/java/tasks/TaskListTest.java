@@ -1,8 +1,8 @@
 package tasks;
 
-import duke.tasks.Task;
-import duke.tasks.ToDos;
-import duke.tasks.TaskList;
+import geng.tasks.Task;
+import geng.tasks.ToDos;
+import geng.tasks.TaskList;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 

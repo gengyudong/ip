@@ -1,9 +1,9 @@
-package duke.tasks;
-
-import duke.ui.GengException;
+package geng.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import geng.ui.GengException;
 
 /**
  * Represents a task with an event, which has a start and end datetime.
@@ -73,7 +73,7 @@ public class Events extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm a");
-        return "E |" + super.toString() + " | " + this.startDatetime.format(formatter) + " - " +
-                this.endDatetime.format(formatter);
+        return "E |" + super.toString() + " | " + this.startDatetime.format(formatter) + " - "
+                + this.endDatetime.format(formatter);
     }
 }

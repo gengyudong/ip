@@ -1,8 +1,8 @@
 package ui;
 
-import duke.ui.Parser;
-import duke.commands.Command;
-import duke.ui.GengException;
+import geng.ui.Parser;
+import geng.commands.Command;
+import geng.ui.GengException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

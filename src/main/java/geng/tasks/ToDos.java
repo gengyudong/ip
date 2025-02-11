@@ -1,4 +1,4 @@
-package duke.tasks;
+package geng.tasks;
 
 /**
  * Represents a To-Do task, which is a type of Task.

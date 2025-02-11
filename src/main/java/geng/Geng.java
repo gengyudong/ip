@@ -1,10 +1,13 @@
-package duke;
-
-import duke.commands.Command;
-import duke.tasks.TaskList;
-import duke.ui.*;
+package geng;
 
 import java.util.Scanner;
+
+import geng.commands.Command;
+import geng.tasks.TaskList;
+import geng.ui.GengException;
+import geng.ui.Parser;
+import geng.ui.Storage;
+import geng.ui.Ui;
 
 /**
  * Represents the main application class for Geng.

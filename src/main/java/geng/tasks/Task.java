@@ -1,4 +1,4 @@
-package duke.tasks;
+package geng.tasks;
 
 /**
  * Represents a task with a description and completion status.

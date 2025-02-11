@@ -1,36 +1,40 @@
-package duke.commands;
+package geng.commands;
 
-import duke.tasks.*;
-import duke.ui.*;
+import geng.tasks.Task;
+import geng.tasks.TaskList;
+import geng.ui.GengException;
+import geng.ui.Storage;
+import geng.ui.Ui;
+
 
 /**
- * Represents a command to unmark a task, changing its status back to "not completed".
- * This command modifies the status of the specified task to "not complete" and saves the changes.
+ * Represents a command to mark a task as completed.
+ * This command modifies the status of the specified task to "complete" and saves the changes.
  */
-public class UnmarkCommand implements Command {
+public class MarkCommand implements Command {
     private final int taskIndex;
 
     /**
-     * Constructs an UnmarkCommand with the given input to specify the task to unmark.
+     * Constructs a MarkCommand with the given input to specify the task to mark.
      * The task index is extracted from the input string and adjusted to be zero-based.
      *
-     * @param input The user input containing the task number to unmark.
+     * @param input The user input containing the task number to mark as complete.
      * @throws GengException If the input is invalid or the task number is not specified correctly.
      */
-    public UnmarkCommand(String input) throws GengException {
+    public MarkCommand(String input) throws GengException {
         try {
             String[] parts = input.split(" ");
             this.taskIndex = Integer.parseInt(parts[1]) - 1;
         } catch (Exception e) {
-            throw new GengException("Please specify a valid task number to unmark.");
+            throw new GengException("Please specify a valid task number to mark.");
         }
     }
 
     /**
-     * Executes the command by unmarking the specified task (marking it as not completed) and saving the changes.
+     * Executes the command by marking the specified task as complete and saving the changes.
      *
      * @param tasks   The task list containing the tasks.
-     * @param ui      The user interface to display the task unmarking status.
+     * @param ui      The user interface to display the task completion status.
      * @param storage The storage handler to save the updated task list.
      * @throws GengException If the task number is invalid or any other error occurs.
      */
@@ -40,8 +44,8 @@ public class UnmarkCommand implements Command {
             throw new GengException("Invalid task number.");
         }
         Task task = tasks.getTask(taskIndex);
-        task.markUncomplete();
-        ui.showTaskUnmarked(task);
+        task.markComplete();
+        ui.showTaskMarked(task);
         storage.saveTasksToFile(tasks.getTaskList());
     }
 }
