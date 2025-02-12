@@ -40,13 +40,13 @@ public class DeleteCommand implements Command {
      * @throws GengException If the task number is invalid or there is an error in saving.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new GengException("Invalid task number.");
         }
         Task removedTask = tasks.getTask(taskIndex);
         tasks.removeTask(taskIndex);
-        ui.showTaskDeleted(removedTask, tasks.size());
         storage.saveTasksToFile(tasks.getTaskList());
+        return ui.showTaskDeleted(removedTask, tasks.size());
     }
 }

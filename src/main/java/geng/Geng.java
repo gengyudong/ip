@@ -70,4 +70,13 @@ public class Geng {
     public static void main(String[] args) {
         new Geng("data/geng.txt").run();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) throws GengException {
+        Parser parser = new Parser();
+        Command command = parser.parseInput(input);
+        return command.execute(tasks, ui, storage);
+    }
 }

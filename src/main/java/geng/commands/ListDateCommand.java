@@ -31,7 +31,7 @@ public class ListDateCommand implements Command {
      * @throws GengException If an error occurs while filtering or displaying the tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
-        ui.showTaskListByDate(date, tasks.getTaskList());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+        return ui.showTaskListByDate(date, tasks.getTaskList());
     }
 }

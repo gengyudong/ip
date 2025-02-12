@@ -43,13 +43,14 @@ public class AddEventCommand implements Command {
      * @param tasks   The task list to which the new task is added.
      * @param ui      The user interface to display messages.
      * @param storage The storage handler to save the updated task list.
+     * @return The string representation of the input.
      * @throws GengException If there is an error in saving the task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
         Task task = new Events(this.description, this.start, this.end);
         tasks.addTask(task);
-        ui.showTaskAdded(task, tasks.size());
         storage.saveTasksToFile(tasks.getTaskList());
+        return ui.showTaskAdded(task, tasks.size());
     }
 }

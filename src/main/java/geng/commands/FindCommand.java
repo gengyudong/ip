@@ -39,7 +39,7 @@ public class FindCommand implements Command {
      * @throws GengException If an error occurs during execution.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
         ArrayList<Task> matchedTaskList = new ArrayList<>();
 
         for (Task task : tasks.getTaskList()) {
@@ -49,9 +49,9 @@ public class FindCommand implements Command {
         }
 
         if (matchedTaskList.isEmpty()) {
-            ui.showErrorMessage("There is no task that matches the keyword: " + this.keyword);
+            return ui.showErrorMessage("There is no task that matches the keyword: " + this.keyword);
         } else {
-            ui.showTaskList(matchedTaskList);
+            return ui.showTaskList(matchedTaskList);
         }
     }
 }

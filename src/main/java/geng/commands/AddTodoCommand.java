@@ -39,10 +39,10 @@ public class AddTodoCommand implements Command {
      * @throws GengException If there is an error in saving the task.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
         Task task = new ToDos(description);
         tasks.addTask(task);
-        ui.showTaskAdded(task, tasks.size());
         storage.saveTasksToFile(tasks.getTaskList());
+        return ui.showTaskAdded(task, tasks.size());
     }
 }

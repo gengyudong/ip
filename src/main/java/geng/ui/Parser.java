@@ -10,6 +10,7 @@ import geng.commands.ListCommand;
 import geng.commands.ListDateCommand;
 import geng.commands.MarkCommand;
 import geng.commands.UnmarkCommand;
+import javafx.application.Platform;
 
 /**
  * The Parser class is responsible for parsing user input commands
@@ -47,8 +48,11 @@ public class Parser {
             return new AddDeadlineCommand(input);
         } else if (input.startsWith("event")) {
             return new AddEventCommand(input);
+        } else if (input.equals("bye")) {
+            Platform.exit();
         } else {
             throw new GengException("My brain is not big enough to understand... Input: todo/deadline/event");
         }
+        return null;
     }
 }

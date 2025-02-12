@@ -19,5 +19,5 @@ public interface Command {
      * @param storage The {@code Storage} used for saving and loading tasks.
      * @throws GengException If an error occurs during command execution.
      */
-    void execute(TaskList tasks, Ui ui, Storage storage) throws GengException;
+    String execute(TaskList tasks, Ui ui, Storage storage) throws GengException;
 }

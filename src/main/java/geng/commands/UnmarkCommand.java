@@ -38,13 +38,13 @@ public class UnmarkCommand implements Command {
      * @throws GengException If the task number is invalid or any other error occurs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws GengException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
             throw new GengException("Invalid task number.");
         }
         Task task = tasks.getTask(taskIndex);
         task.markUncomplete();
-        ui.showTaskUnmarked(task);
         storage.saveTasksToFile(tasks.getTaskList());
+        return ui.showTaskUnmarked(task);
     }
 }

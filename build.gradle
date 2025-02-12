@@ -49,7 +49,7 @@ test {
 }
 
 application {
-    mainClass.set("geng.Launcher")
+    mainClass.set("geng.gui.Launcher")
 }
 
 shadowJar {
