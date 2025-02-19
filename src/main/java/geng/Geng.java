@@ -68,9 +68,9 @@ public class Geng {
     }
 
     /**
-     * The entry point of the application. Initializes and runs the Geng application.
+     * Initializes and runs the Geng chatbot.
      *
-     * @param args Command line arguments (not used).
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         assert args != null : "Args should not be null";
