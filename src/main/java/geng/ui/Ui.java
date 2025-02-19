@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Displays the initial greeting message when the program starts.
      *
-     * @return
+     * @return String representation of greeting message.
      */
     public String showInitialMessage() {
         return "Hey yo! I'm Geng! How can I help you?";
@@ -82,26 +82,26 @@ public class Ui {
                     .append(targetDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")))
                     .append(":\n");
 
-            boolean existTask = false;
+            boolean isExist = false;
 
             for (Task task : taskList) {
                 if (task instanceof Deadlines deadlineTask) {
                     LocalDateTime deadline = deadlineTask.getDeadline();
                     if (deadline.toLocalDate().equals(targetDate)) {
                         result.append(task.toString()).append("\n");
-                        existTask = true;
+                        isExist = true;
                     }
                 } else if (task instanceof Events eventTask) {
                     LocalDateTime from = eventTask.getStartDatetime();
                     LocalDateTime to = eventTask.getEndDatetime();
                     if (from.toLocalDate().equals(targetDate) || to.toLocalDate().equals(targetDate)) {
                         result.append(task.toString()).append("\n");
-                        existTask = true;
+                        isExist = true;
                     }
                 }
             }
 
-            if (!existTask) {
+            if (!isExist) {
                 return "No tasks found for this date.";
             }
 
@@ -120,11 +120,9 @@ public class Ui {
      * @param size The current size of the task list after addition.
      */
     public String showTaskAdded(Task task, int size) {
-        StringBuilder result = new StringBuilder();
-        result.append("Got it. I've added this task:\n");
-        result.append("  ").append(task.toString()).append("\n");
-        result.append("Now you have ").append(size).append(" tasks in the list.");
-        return result.toString();
+        return "Got it. I've added this task:\n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -134,11 +132,9 @@ public class Ui {
      * @param size The current size of the task list after deletion.
      */
     public String showTaskDeleted(Task task, int size) {
-        StringBuilder result = new StringBuilder();
-        result.append("Alright! I've removed this task:\n");
-        result.append("  ").append(task.toString()).append("\n");
-        result.append("Now you have ").append(size).append(" tasks in the list.");
-        return result.toString();
+        return "Alright! I've removed this task:\n"
+                + "  " + task.toString() + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -147,10 +143,8 @@ public class Ui {
      * @param task The task that was marked as complete.
      */
     public String showTaskMarked(Task task) {
-        StringBuilder result = new StringBuilder();
-        result.append("Good Job! I've marked this task as done:");
-        result.append("  ").append(task.toString()).append("\n");
-        return result.toString();
+        return "Good Job! I've marked this task as done:"
+                + "  " + task.toString() + "\n";
     }
 
     /**
@@ -159,9 +153,7 @@ public class Ui {
      * @param task The task that was marked as incomplete.
      */
     public String showTaskUnmarked(Task task) {
-        StringBuilder result = new StringBuilder();
-        result.append("Oki, I've marked this task as not done yet:\n");
-        result.append("  ").append(task.toString());
-        return result.toString();
+        return "Oki, I've marked this task as not done yet:\n"
+                + "  " + task.toString();
     }
 }
