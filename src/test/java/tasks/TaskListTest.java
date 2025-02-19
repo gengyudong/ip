@@ -1,12 +1,14 @@
 package tasks;
 
-import geng.tasks.Task;
-import geng.tasks.ToDos;
-import geng.tasks.TaskList;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import geng.tasks.Task;
+import geng.tasks.TaskList;
+import geng.tasks.ToDos;
 
 public class TaskListTest {
 

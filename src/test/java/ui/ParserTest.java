@@ -1,11 +1,15 @@
 package ui;
 
-import geng.ui.Parser;
-import geng.commands.Command;
-import geng.ui.GengException;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import geng.commands.Command;
+import geng.ui.GengException;
+import geng.ui.Parser;
+
 
 public class ParserTest {
 
