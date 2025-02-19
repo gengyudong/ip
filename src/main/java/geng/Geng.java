@@ -25,6 +25,7 @@ public class Geng {
      * @param filePath The path of the file where tasks are stored.
      */
     public Geng(String filePath) {
+        assert filePath != null && !filePath.trim().isEmpty() : "File path should not be null or empty";
         ui = new Ui();
         storage = new Storage(filePath);
         try {
@@ -33,6 +34,8 @@ public class Geng {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+
+        assert tasks != null : "TaskList should be initialized even if loading fails";
     }
 
     /**
@@ -47,6 +50,7 @@ public class Geng {
 
         while (true) {
             input = scanner.nextLine();
+            assert input != null : "User input should not be null";
             try {
                 // Exit the loop if the user types "bye"
                 if (input.equals("bye")) {
@@ -54,6 +58,7 @@ public class Geng {
                     break;
                 }
                 Command command = parser.parseInput(input);
+                assert command != null : "Parsed command should not be null";
                 command.execute(tasks, ui, storage);
             } catch (GengException e) {
                 ui.showErrorMessage(e.getMessage());
@@ -68,6 +73,7 @@ public class Geng {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
+        assert args != null : "Args should not be null";
         new Geng("data/geng.txt").run();
     }
 
@@ -75,8 +81,10 @@ public class Geng {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) throws GengException {
+        assert input != null && !input.trim().isEmpty() : "Input should not be null or empty";
         Parser parser = new Parser();
         Command command = parser.parseInput(input);
+        assert command != null : "Parsed command should not be null";
         return command.execute(tasks, ui, storage);
     }
 }
