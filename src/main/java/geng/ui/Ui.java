@@ -156,4 +156,21 @@ public class Ui {
         return "Oki, I've marked this task as not done yet:\n"
                 + "  " + task.toString();
     }
+
+    /**
+     * Displays a list of Tasks for a specific date.
+     *
+     * @param matchedTask The list of task to be displayed.
+     */
+    public String showSchedule(ArrayList<Task> matchedTask) {
+        if (matchedTask.isEmpty()) {
+            return "No tasks found for this date.";
+        } else {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < matchedTask.size(); i++) {
+                result.append(i + 1).append(". ").append(matchedTask.get(i)).append("\n");
+            }
+            return result.toString().trim();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 T | 0 | borrow book
-T | 0 | borrow book
 T | 0 | hi
 T | 0 | test
 T | 0 | hi
+D | 0 | do 2103 | 20 Feb 2025 23:59 pm
+E | 0 | career fair | 18 Feb 2025 10:00 am - 20 Feb 2025 17:00 pm

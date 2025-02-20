@@ -9,6 +9,7 @@ import geng.commands.FindCommand;
 import geng.commands.ListCommand;
 import geng.commands.ListDateCommand;
 import geng.commands.MarkCommand;
+import geng.commands.ShowScheduleCommand;
 import geng.commands.UnmarkCommand;
 import javafx.application.Platform;
 
@@ -38,6 +39,8 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (input.startsWith("find")) {
             return new FindCommand(input);
+        } else if (input.startsWith("show")) {
+            return new ShowScheduleCommand(input);
         } else if (input.startsWith("mark")) {
             return new MarkCommand(input);
         } else if (input.startsWith("unmark")) {
