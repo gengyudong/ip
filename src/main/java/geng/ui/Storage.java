@@ -20,7 +20,7 @@ import geng.tasks.ToDos;
  * updated tasks back to the file.
  */
 public class Storage {
-    private final String FILE_PATH;
+    private final String filePath;
 
     /**
      * Constructor for Storage that initializes the file path.
@@ -28,7 +28,7 @@ public class Storage {
      * @param filePath The path to the file where tasks will be saved or loaded from.
      */
     public Storage(String filePath) {
-        this.FILE_PATH = filePath;
+        this.filePath = filePath;
     }
 
     /**
@@ -40,7 +40,7 @@ public class Storage {
     public ArrayList<Task> load() throws GengException {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            File file = new File(FILE_PATH);
+            File file = new File(filePath);
             if (!file.exists()) {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
@@ -122,7 +122,7 @@ public class Storage {
      */
     public void saveTasksToFile(ArrayList<Task> taskList) throws GengException {
         try {
-            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(FILE_PATH));
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(filePath));
             for (Task task : taskList) {
                 String taskString = task.toString();
                 fileWriter.write(taskString);
