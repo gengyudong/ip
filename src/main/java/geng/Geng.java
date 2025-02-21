@@ -81,10 +81,14 @@ public class Geng {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) throws GengException {
-        assert input != null && !input.trim().isEmpty() : "Input should not be null or empty";
-        Parser parser = new Parser();
-        Command command = parser.parseInput(input);
-        assert command != null : "Parsed command should not be null";
-        return command.execute(tasks, ui, storage);
+        try {
+            assert input != null && !input.trim().isEmpty() : "Input should not be null or empty";
+            Parser parser = new Parser();
+            Command command = parser.parseInput(input);
+            assert command != null : "Parsed command should not be null";
+            return command.execute(tasks, ui, storage);
+        } catch (GengException e) {
+            return ui.showErrorMessage(e.getMessage());
+        }
     }
 }
