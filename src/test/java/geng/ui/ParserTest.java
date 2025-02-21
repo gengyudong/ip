@@ -1,4 +1,4 @@
-package ui;
+package geng.ui;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import geng.commands.Command;
-import geng.ui.GengException;
-import geng.ui.Parser;
-
 
 public class ParserTest {
 
