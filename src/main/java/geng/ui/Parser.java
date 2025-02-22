@@ -54,7 +54,7 @@ public class Parser {
         } else if (input.equals("bye")) {
             Platform.exit();
         } else {
-            throw new GengException("My brain is not big enough to understand... Input: todo/deadline/event");
+            throw new GengException("My brain is not big enough to understand...\nInput: todo/deadline/event");
         }
         return null;
     }

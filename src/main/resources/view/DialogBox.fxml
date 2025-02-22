@@ -24,7 +24,7 @@
                text="Label"
                wrapText="true"
                maxWidth="1.7976931348623157E308"
-               HBox.hgrow="ALWAYS"/>
+               HBox.hgrow="ALWAYS" />
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

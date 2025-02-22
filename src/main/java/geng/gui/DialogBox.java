@@ -6,13 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-
 
 /**
  * Represents a dialog box in Geng chatbot interface.
@@ -41,11 +39,8 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(img);
-
         if (isUser) {
-            dialog.setTextAlignment(javafx.scene.text.TextAlignment.RIGHT);
-        } else {
-            dialog.setTextAlignment(javafx.scene.text.TextAlignment.LEFT);
+            this.setStyle("-fx-background-color: #f0f0f0;");
         }
     }
 
@@ -56,7 +51,6 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
-        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     public static DialogBox getGengDialog(String text, Image img) {
