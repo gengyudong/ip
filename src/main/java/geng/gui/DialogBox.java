@@ -30,7 +30,7 @@ public class DialogBox extends HBox {
      * @param text The message to be displayed in the dialog box.
      * @param img The profile image of the speaker.
      */
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isUser) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -39,9 +39,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         dialog.setText(text);
         displayPicture.setImage(img);
+
+        if (isUser) {
+            dialog.setTextAlignment(javafx.scene.text.TextAlignment.RIGHT);
+        } else {
+            dialog.setTextAlignment(javafx.scene.text.TextAlignment.LEFT);
+        }
     }
 
     /**
@@ -51,15 +56,15 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);
         this.getChildren().setAll(tmp);
-        this.setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        this.setAlignment(Pos.TOP_RIGHT);
     }
 
     public static DialogBox getGengDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        return new DialogBox(text, img, false);
+    }
+
+    public static DialogBox getUserDialog(String text, Image img) {
+        var db = new DialogBox(text, img, true);
         db.flip();
         return db;
     }

@@ -6,8 +6,10 @@ import geng.Geng;
 import geng.ui.Ui;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -33,6 +35,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+
+            Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+            stage.setWidth(screenBounds.getWidth() * 0.5);
+            stage.setHeight(screenBounds.getHeight() * 0.8);
+            stage.setTitle("Geng Chatbot");
 
             MainWindow controller = fxmlLoader.getController();
             controller.setGeng(geng);

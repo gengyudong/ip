@@ -29,9 +29,14 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/musk.jpg"));
     private Image gengImage = new Image(this.getClass().getResourceAsStream("/images/trump.jpg"));
 
+    /**
+     * Initializes the main window.
+     * This method binds the scroll pane to the dialog container and sets the preferred width of the dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
     public void setGeng(Geng geng) {
