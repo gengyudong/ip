@@ -18,7 +18,7 @@
                     hbarPolicy="NEVER"
                     vbarPolicy="AS_NEEDED"
                     AnchorPane.topAnchor="0"
-                    AnchorPane.bottomAnchor="50"
+                    AnchorPane.bottomAnchor="0"
                     AnchorPane.leftAnchor="0"
                     AnchorPane.rightAnchor="0">
             <content>

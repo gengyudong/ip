@@ -28,8 +28,8 @@ public class Ui {
     /**
      * Displays the exit message when the user ends the session.
      */
-    public void showExitMessage() {
-        System.out.println("Thank you for patronising. Hope to see you again soon!");
+    public String showExitMessage() {
+        return "Thank you for patronising. Hope to see you again soon!";
     }
 
     /**
@@ -143,7 +143,7 @@ public class Ui {
      * @param task The task that was marked as complete.
      */
     public String showTaskMarked(Task task) {
-        return "Good Job! I've marked this task as done:"
+        return "Good Job! I've marked this task as done:\n"
                 + "  " + task.toString() + "\n";
     }
 

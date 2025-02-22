@@ -3,6 +3,7 @@ package geng.gui;
 import geng.Geng;
 import geng.ui.GengException;
 import geng.ui.Ui;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,6 +26,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Geng geng;
+    private Ui ui;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/musk.jpg"));
     private Image gengImage = new Image(this.getClass().getResourceAsStream("/images/trump.jpg"));
@@ -39,8 +41,9 @@ public class MainWindow extends AnchorPane {
         dialogContainer.prefWidthProperty().bind(scrollPane.widthProperty());
     }
 
-    public void setGeng(Geng geng) {
+    public void setGeng(Geng geng, Ui ui) {
         this.geng = geng;
+        this.ui = ui;
     }
 
     /**
@@ -62,11 +65,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws GengException {
         String userText = this.userInput.getText();
-        String gengText = this.geng.getResponse(userText);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getGengDialog(gengText, gengImage)
-        );
-        userInput.clear();
+        String gengText;
+        if (userText.equals("bye")) {
+            gengText = this.ui.showExitMessage();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, userImage),
+                    DialogBox.getGengDialog(gengText, gengImage)
+            );
+            userInput.clear();
+
+            PauseTransition delay = new PauseTransition(javafx.util.Duration.seconds(3));
+            delay.setOnFinished(event -> System.exit(0));
+            delay.play();
+        } else {
+            gengText = this.geng.getResponse(userText);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, userImage),
+                    DialogBox.getGengDialog(gengText, gengImage)
+            );
+            userInput.clear();
+        }
     }
 }

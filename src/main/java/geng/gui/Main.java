@@ -42,7 +42,7 @@ public class Main extends Application {
             stage.setTitle("Geng Chatbot");
 
             MainWindow controller = fxmlLoader.getController();
-            controller.setGeng(geng);
+            controller.setGeng(geng, ui);
             controller.showWelcomeMessage(ui);
 
             stage.show();
